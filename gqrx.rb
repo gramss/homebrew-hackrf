@@ -9,7 +9,7 @@ class Gqrx < Formula
 
   def install
     mkdir "build" do
-      ENV.append "CXXFLAGS", "-02"
+      # ENV.append "CXXFLAGS", "-02"
       
       args = %W[
         -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-undefined,dynamic_lookup'
