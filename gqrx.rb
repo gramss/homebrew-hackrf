@@ -8,9 +8,7 @@ class Gqrx < Formula
   depends_on 'gramss/sdr/gr-osmosdr'
 
   def install
-    mkdir "build" do
-      # ENV.append "CXXFLAGS", "-02"
-      
+    mkdir "build" do      
       args = %W[
         -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-undefined,dynamic_lookup'
         -DQt5_DIR='#{HOMEBREW_PREFIX}/lib/cmake/Qt5'
@@ -18,8 +16,7 @@ class Gqrx < Formula
       ] + std_cmake_args
       
       system "cmake", "..", *args
-      system "make"
-      bin.install 'gqrx.app/Contents/MacOS/gqrx'    
+      system "make", "install"
     end
   end
 end
