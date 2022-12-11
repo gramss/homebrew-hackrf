@@ -10,7 +10,14 @@ class Gqrx < Formula
   def install
     mkdir "build" do
       ENV.append "CXXFLAGS", "-02"
-      system "cmake", ".."
+      
+      args = %W[
+        -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-undefined,dynamic_lookup'
+        -DQt5_DIR='#{HOMEBREW_PREFIX}/lib/cmake/Qt5'
+        -DPYTHON_LIBRARY='#{HOMEBREW_PREFIX}/lib/libgnuradio-runtime.dylib'
+      ] + std_cmake_args
+      
+      system "cmake", "..", *args
       system "make"
       bin.install 'gqrx.app/Contents/MacOS/gqrx'    
     end
